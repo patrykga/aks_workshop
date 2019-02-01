@@ -1,5 +1,5 @@
 
-Install Azure CLI
+Install Azure CLI or you can use Azure Power Shell
 
 https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest
 
@@ -29,4 +29,19 @@ Get admin credentials:
 ```
 az acr credential show --name patrykgaDockerContainerRegistry
 ```
+
+Because it take some time, now we need to create Azure Kubernetes Service (AKS):
+```
+az aks create --resource-group WorkshopCube --name WorkshopAKS --node-count 3 --enable-addons monitoring --generate-ssh-keys
+```
+I assume you have ready .net core docker project repository. Then we need to:
+
 Configure VSTS Package
+
+We need to open VSTS (Azure DevOps project)
+
+---Commit GIT Project
+
+Back to Azure
+if you run az cli commands from Azure Powershell you should store your ssh keys
+
