@@ -10,7 +10,7 @@
 
 We will have AKS with Load Balancer.
 
-####Let's get started!
+#### Let's get started!
 
 Install Azure CLI or you can use Azure Power Shell
 
