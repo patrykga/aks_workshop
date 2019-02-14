@@ -77,13 +77,42 @@ Get admin credentials:
 az acr credential show --name patrykgaDockerContainerRegistry
 ```
 
+We need to install kubectl
+
+```
+az aks install-cli
+```
+
+Set kubectl path in Powershell, sample:
+
+```
+$env:path += 'C:\Users\patrykga\.azure-kubectl'
+```
+
+Get credentials for your cubernetes:
+
+```
+az aks get-credentials --resource-group WorkshopCube --name WorkshopAKS
+```
+
 Create Kubernetes secret (connect to registry to pull images):
 
 ```
 kubectl create secret docker-registry acr-auth --docker-server <acr-login-server> --docker-username <service-principal-ID> --docker-password <service-principal-password>
 ```
+We need to install chocolate to install helm (Windows Package Manager)
 
-We install helm (helm is something like package manager)
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; `iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+```
+
+We need to install helm
+
+```
+choco install kubernetes-helm
+```
+
+We need to install Helm
 
 ```
 helm init
@@ -92,7 +121,7 @@ helm init
 Verify helm installation:
 
 ```
-kubectl -n kube-system get po
+kubectl describe deploy tiller-deploy --namespace=kube-system
 ```
 
 We need to install nginx ingress:
@@ -112,4 +141,21 @@ Now we can again try to install nginx-ingress:
 ```
 helm install stable/nginx-ingress
 ```
+We have Kubernetes and Helm Package Manager.
 
+Open Kubernetes Dashboard:
+
+```
+az aks browse --resource-group WorkshopCube --name WorkshopAKS
+```
+Error
+
+Create ClusterRoleBinding
+```
+kubectl create clusterrolebinding kubernetes-dashboard -n kube-system --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+```
+
+We can open Kubernetes Dashboard now:
+```
+az aks browse --resource-group WorkshopCube --name WorkshopAKS
+```
