@@ -12,7 +12,7 @@ We will have AKS with Load Balancer.
 
 #### Let's get started!
 
-Install Azure CLI or you can use Azure Power Shell
+Install Azure CLI
 
 https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest
 
@@ -41,10 +41,6 @@ Enable admin:
 ```
 az acr update -n patrykgaDockerContainerRegistry --admin-enabled true
 ```
-Get admin credentials:
-```
-az acr credential show --name patrykgaDockerContainerRegistry
-```
 
 (You will need this credentials to configure Azure DevOps (VSTS))
 
@@ -61,8 +57,59 @@ Configure VSTS Package
 
 We need to open VSTS (Azure DevOps project)
 
----Commit GIT Project
+Create Build Package using YAML
+Configuration:
+build:
+Project Name: $(Build.Repository.Name)
+Action: Build Service Images
+Additional Image Tags: $(Build.BuildNumber)
+push:
+Action: Push Service Images
 
-Back to Azure
-if you run az cli commands from Azure Powershell you should store your ssh keys
+I will describe release process
+
+We back to kubernetes:
+
+We need to get Container Registry Credentials:
+
+Get admin credentials:
+```
+az acr credential show --name patrykgaDockerContainerRegistry
+```
+
+Create Kubernetes secret (connect to registry to pull images):
+
+```
+kubectl create secret docker-registry acr-auth --docker-server <acr-login-server> --docker-username <service-principal-ID> --docker-password <service-principal-password>
+```
+
+We install helm (helm is something like package manager)
+
+```
+helm init
+```
+
+Verify helm installation:
+
+```
+kubectl -n kube-system get po
+```
+
+We need to install nginx ingress:
+```
+helm install stable/nginx-ingress
+```
+
+We will get error, we need to create specjal account:
+```
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller --upgrade
+helm repo update
+```
+
+Now we can again try to install nginx-ingress:
+```
+helm install stable/nginx-ingress
+```
 
