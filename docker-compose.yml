@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  kuber.mvc:
+    image: ${DOCKER_REGISTRY-}kubermvc
+    build:
+      context: .
+      dockerfile: Kuber.Mvc/Dockerfile
+    depends_on:
+      - kuber.api
+    ports:
+      - "8080:80"
+    environment:
+      API_HOST: kuber.api
+  kuber.api:
+    image: ${DOCKER_REGISTRY-}kuberapi
+    build:
+      context: .
+      dockerfile: Kuber.Api/Dockerfile
+    ports:
+      - "8081:80"

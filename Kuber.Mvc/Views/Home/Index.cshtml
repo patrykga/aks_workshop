@@ -1,0 +1,21 @@
+﻿@model Kuber.Mvc.Models.AppEnvironmentModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>This Application</h2>
+        <ul>
+            <li>Hostname: @Model.MvcEnvironement.Hostname</li>
+            <li>Timestamp @Model.MvcEnvironement.Timestamp.ToString("HH:mm:ss.FFFFFF")</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>WepAPI</h2>
+        <ul>
+            <li>Hostname: @Model.ApiEnvironement.Hostname</li>
+            <li>Timestamp @Model.ApiEnvironement.Timestamp.ToString("HH:mm:ss.FFFFFF")</li>
+        </ul>
+    </div>
+</div>
