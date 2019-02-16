@@ -14,19 +14,21 @@ In this tutorial we will use Powershell
 #### Let's get started!
 
 
-We need to install chocolate to install helm (Windows Package Manager)
+We need to install chocolate to install helm (The Kubernetes Package Manager)
 ```
 Set-ExecutionPolicy Bypass -Scope Process -Force; `iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 ```
 
 Install Azure CLI
-you can install cli from this link:
+You can install cli from this link:
 https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest
 
 or simple use chocolate:
 ```
 choco install azure-cli
 ```
+
+Restart Powershell
 
 #### Azure
 
