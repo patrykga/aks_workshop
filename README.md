@@ -9,6 +9,7 @@
 - We will create Azure DevOps (VSTS) Release ??
 
 We will have AKS with Load Balancer.
+In this tutorial we will use Powershell
 
 #### Let's get started!
 
@@ -26,29 +27,43 @@ To setup current subscription if you have more then one:
 ```
 az account set -s SUBSCRIPTION_ID
 ```
+We need to add resource group name to variable (you need to change this to your own name)
+```
+$resourceGroupName = "WorkshopCube"
+```
 Create new Resource Group:
 ```
-az group create --name WorkshopCube --location northeurope
+az group create --name $resourceGroupName --location northeurope
 ```
 
 #### Container Registry Service
 
+Set variable for container name (you need to change this to your own name):
+```
+$dockerRegistryContainerName = "patrykgaDockerContainerRegistry"
+```
+
 Create  Container Registry:
 ```
-az acr create --resource-group WorkshopCube --name patrykgaDockerContainerRegistry --sku Basic
+az acr create --resource-group $resourceGroupName --name $dockerRegistryContainerName --sku Basic
 ```
 Enable admin:
 ```
-az acr update -n patrykgaDockerContainerRegistry --admin-enabled true
+az acr update -n $dockerRegistryContainerName --admin-enabled true
 ```
 
 (You will need this credentials to configure Azure DevOps (VSTS) and kubernetes secret to pull images)
 
 #### Create Azure Kubernetes Service
 
+We need to add AKS name to variable:
+```
+$aksName = "WorkshopAKS"
+```
+
 Because it take some time, now we will create Azure Kubernetes Service (AKS):
 ```
-az aks create --resource-group WorkshopCube --name WorkshopAKS --node-count 3 --enable-addons monitoring --generate-ssh-keys
+az aks create --resource-group $resourceGroupName --name $aksName --node-count 3 --enable-addons monitoring --generate-ssh-keys
 ```
 
 #### Configure Azure DevOps (VSTS) Package Pipelines
@@ -74,7 +89,7 @@ We need to get Container Registry Credentials:
 
 Get admin credentials:
 ```
-az acr credential show --name patrykgaDockerContainerRegistry
+az acr credential show --name $dockerRegistryContainerName
 ```
 
 We need to install kubectl:
@@ -82,14 +97,14 @@ We need to install kubectl:
 az aks install-cli
 ```
 
-Set kubectl path in Powershell, sample:
+Set kubectl path in Powershell, sample (you need to update it to your own path):
 ```
 $env:path += 'C:\Users\patrykga\.azure-kubectl'
 ```
 
 Get credentials for your kubernetes:
 ```
-az aks get-credentials --resource-group WorkshopCube --name WorkshopAKS
+az aks get-credentials --resource-group $resourceGroupName --name $aksName
 ```
 
 Create Kubernetes secret (connect to registry to pull images):
@@ -140,7 +155,7 @@ We have Kubernetes and Helm Package Manager.
 
 Open Kubernetes Dashboard:
 ```
-az aks browse --resource-group WorkshopCube --name WorkshopAKS
+az aks browse --resource-group $resourceGroupName --name $aksName
 ```
 
 We will get error
@@ -152,5 +167,5 @@ kubectl create clusterrolebinding kubernetes-dashboard -n kube-system --clusterr
 
 We can open Kubernetes Dashboard now:
 ```
-az aks browse --resource-group WorkshopCube --name WorkshopAKS
+az aks browse --resource-group $resourceGroupName --name $aksName
 ```
