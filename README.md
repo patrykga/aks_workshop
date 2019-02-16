@@ -13,9 +13,20 @@ In this tutorial we will use Powershell
 
 #### Let's get started!
 
-Install Azure CLI
 
+We need to install chocolate to install helm (Windows Package Manager)
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; `iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+```
+
+Install Azure CLI
+you can install cli from this link:
 https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest
+
+or simple use chocolate:
+```
+choco install azure-cli
+```
 
 #### Azure
 
@@ -110,11 +121,6 @@ az aks get-credentials --resource-group $resourceGroupName --name $aksName
 Create Kubernetes secret (connect to registry to pull images):
 ```
 kubectl create secret docker-registry acr-auth --docker-server <acr-login-server> --docker-username <service-principal-ID> --docker-password <service-principal-password>
-```
-
-We need to install chocolate to install helm (Windows Package Manager)
-```
-Set-ExecutionPolicy Bypass -Scope Process -Force; `iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 ```
 
 We need to install helm
