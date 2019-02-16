@@ -170,12 +170,12 @@ We can open Kubernetes Dashboard now:
 az aks browse --resource-group $resourceGroupName --name $aksName
 ```
 
-We need to go to deployment\chart-api dictionary and run
+We need to go to deployment\chart-api directory and run
 ```
 helm install --namespace default --name kuberapi ./
 ```
 
-Next we need to go to deployment\char-mvc dictionary and run
+Next we need to go to deployment\char-mvc directory and run
 ```
 helm install --namespace default --name kubermvc ./
 ```
