@@ -78,7 +78,11 @@ Because it take some time, now we will create Azure Kubernetes Service (AKS):
 az aks create --resource-group $resourceGroupName --name $aksName --node-count 3 --enable-addons monitoring --generate-ssh-keys
 ```
 
-#### Configure Azure DevOps (VSTS) Package Pipelines
+#### Configure Azure DevOps (VSTS) Pipelines
+
+We need to create Build for our project to prepare Docker Images:
+
+![Pipelines](images/01-Pipelines.png?raw=true "Pipelines")
 
 Configure VSTS Package
 
