@@ -82,7 +82,7 @@ az aks create --resource-group $resourceGroupName --name $aksName --node-count 3
 
 We need to create Build for our project to prepare Docker Images:
 
-![Pipelines](images/01-Pipelines.png?raw=true "Pipelines")
+![Pipelines](images/01-Pipelines.PNG?raw=true "Pipelines")
 
 Configure VSTS Package
 
