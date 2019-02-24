@@ -88,6 +88,18 @@ To configure Azure DevOps Build Click Builds and next New:
 
 ![New Build](images/02-NewBuild.PNG?raw=true "New Build")
 
+You need to select Azure Repos Git, you need to select Team Project, Repository and Default Branch
+
+![New Build](images/03-Build01.PNG?raw=true "New Build")
+
+Select Empty Job:
+
+![New Build](images/04-Build02.PNG?raw=true "New Build")
+
+Select Hosted Ubuntu as Agent Pool:
+
+![New Build](images/04-Build03.PNG?raw=true "New Build")
+
 We need to open VSTS (Azure DevOps project)
 
 Create Build Package using YAML
