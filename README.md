@@ -84,7 +84,9 @@ We need to create Build for our project to prepare Docker Images:
 
 ![Pipelines](images/01-Pipelines.PNG?raw=true "Pipelines")
 
-Configure VSTS Package
+To configure Azure DevOps Build Click Builds and next New:
+
+![New Build](images/02-NewBuild.PNG?raw=true "New Build")
 
 We need to open VSTS (Azure DevOps project)
 
