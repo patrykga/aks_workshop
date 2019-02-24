@@ -92,26 +92,9 @@ You need to select Azure Repos Git, you need to select Team Project, Repository 
 
 ![New Build](images/03-Build01.PNG?raw=true "New Build")
 
-Select Empty Job:
+Select Yaml File deployment\yaml\package.yml:
 
 ![New Build](images/04-Build02.PNG?raw=true "New Build")
-
-Select Hosted Ubuntu as Agent Pool:
-
-![New Build](images/04-Build03.PNG?raw=true "New Build")
-
-We need to open VSTS (Azure DevOps project)
-
-Create Build Package using YAML
-Configuration:
-build:
-Project Name: $(Build.Repository.Name)
-Action: Build Service Images
-Additional Image Tags: $(Build.BuildNumber)
-push:
-Action: Push Service Images
-
-[Describe Release Process]
 
 We back to kubernetes:
 
