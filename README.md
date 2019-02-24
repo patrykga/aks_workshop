@@ -1,18 +1,17 @@
 ## Introduction to release .net core app to Azure Kubernetes Service (AKS)
 
 #### What we will do?:
-- We have .net core app
+- We have .net core app (copy this repository to your own Azure DevOps Repo)
 - We will create Azure Container Registry Service (ACR)
 - We will configure Azure DevOps (old VSTS) connection to ACR Service
 - We will configure Azure DevOps (old VSTS) build (build Image and Push to ACR Service)
 - We will create Azure Kubernetes Service (AKS)
 - We will create Azure DevOps (VSTS) Release ??
 
-We will have AKS with Load Balancer.
+After finish this tutorial we will have AKS with Load Balancer.
 In this tutorial we will use Powershell
 
 #### Let's get started!
-
 
 We need to install chocolate to install helm (The Kubernetes Package Manager)
 ```
